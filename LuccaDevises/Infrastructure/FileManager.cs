@@ -1,4 +1,5 @@
-﻿using Infrastructure.Abstraction;
+﻿using Domain;
+using Infrastructure.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,12 +10,27 @@ namespace Infrastructure
     public class FileManager : IFileManager
     {
         private readonly string filePath;
-        public FileManager(string path)
+        private readonly IFileValidator validator;
+        private readonly IFileParser parser;
+        public FileManager(string path, IFileValidator fileValidator, IFileParser fileParser)
         {
             filePath = path;
+            validator = fileValidator;
+            parser = fileParser;
         }
 
-        public IList<string> Open()
+        public BaseData GetData()
+        {
+            BaseData baseData = null;
+            IList<string> lines = Open();
+            if (validator.Validate())
+            {
+                baseData = parser.Parse();
+            }
+            return baseData;
+        }
+
+        private IList<string> Open()
         {
             if (!File.Exists(filePath))
             {
