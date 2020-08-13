@@ -18,18 +18,15 @@ namespace ApplicationService
         }
         public int CalculateChangeRate()
         {
-            if (changes == null)
-            {
-                return -1;
-            }
-
             decimal convertedRate = baseAmount;
-            foreach (var item in changes)
+            if (changes != null)
             {
-                convertedRate = Math.Round(convertedRate * item.Rate, 4);
+                foreach (var item in changes)
+                {
+                    convertedRate = Math.Round(convertedRate * item.Rate, 4);
+                }
             }
             return Convert.ToInt32(Math.Round(convertedRate, 0));
-
         }
     }
 }
