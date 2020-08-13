@@ -21,12 +21,12 @@ namespace ApplicationService.Test
         public void ShouldRetrieveEURCHFAUDJPY_WhenGivenExampleArray()
         {
             List<Change> currencyList = new List<Change>();
-            currencyList.Add(new Change("AUD", "CHF", (decimal)0.9661));
-            currencyList.Add(new Change("JPY", "KWU", (decimal)13.1151));
-            currencyList.Add(new Change("EUR", "CHF", (decimal)1.2053));
-            currencyList.Add(new Change("AUD", "JPY", (decimal)86.0305));
-            currencyList.Add(new Change("EUR", "USD", (decimal)1.2989));
-            currencyList.Add(new Change("JPY", "INR", (decimal)0.6571));
+            currencyList.Add(new Change("AUD", "CHF", 0.9661m));
+            currencyList.Add(new Change("JPY", "KWU", 13.1151m));
+            currencyList.Add(new Change("EUR", "CHF", 1.2053m));
+            currencyList.Add(new Change("AUD", "JPY", 86.0305m));
+            currencyList.Add(new Change("EUR", "USD", 1.2989m));
+            currencyList.Add(new Change("JPY", "INR", 0.6571m));
             PathCalculator pc = new PathCalculator(currencyList, "EUR", "JPY");
 
             IList<Change> rates = pc.Rates();
@@ -34,13 +34,13 @@ namespace ApplicationService.Test
             Assert.Equal(3, rates.Count);
             Assert.Equal("EUR", rates[0].SourceCurrency);
             Assert.Equal("CHF", rates[0].TargetCurrency);
-            Assert.Equal((decimal)1.2053, rates[0].Rate);
+            Assert.Equal(1.2053m, rates[0].Rate);
             Assert.Equal("CHF", rates[1].SourceCurrency);
             Assert.Equal("AUD", rates[1].TargetCurrency);
-            Assert.Equal((decimal)1.0351, rates[1].Rate);
+            Assert.Equal(1.0351m, rates[1].Rate);
             Assert.Equal("AUD", rates[2].SourceCurrency);
             Assert.Equal("JPY", rates[2].TargetCurrency);
-            Assert.Equal((decimal)86.0305, rates[2].Rate);
+            Assert.Equal(86.0305m, rates[2].Rate);
 
         }
 
@@ -58,13 +58,13 @@ namespace ApplicationService.Test
         public void ShouldRetrieveEURKWUJPY_WhenKWUShortcutAdded()
         {
             List<Change> currencyList = new List<Change>();
-            currencyList.Add(new Change("AUD", "CHF", (decimal)0.9661));
-            currencyList.Add(new Change("JPY", "KWU", (decimal)13.1151));
-            currencyList.Add(new Change("EUR", "CHF", (decimal)1.2053));
-            currencyList.Add(new Change("AUD", "JPY", (decimal)86.0305));
-            currencyList.Add(new Change("EUR", "USD", (decimal)1.2989));
-            currencyList.Add(new Change("JPY", "INR", (decimal)0.6571));
-            currencyList.Add(new Change("EUR", "KWU", (decimal)1));
+            currencyList.Add(new Change("AUD", "CHF", 0.9661m));
+            currencyList.Add(new Change("JPY", "KWU", 13.1151m));
+            currencyList.Add(new Change("EUR", "CHF", 1.2053m));
+            currencyList.Add(new Change("AUD", "JPY", 86.0305m));
+            currencyList.Add(new Change("EUR", "USD", 1.2989m));
+            currencyList.Add(new Change("JPY", "INR", 0.6571m));
+            currencyList.Add(new Change("EUR", "KWU", 1m));
             PathCalculator pc = new PathCalculator(currencyList, "EUR", "JPY");
 
             IList<Change> rates = pc.Rates();
@@ -94,12 +94,12 @@ namespace ApplicationService.Test
         public void ShouldRetrieveNothing_WhenInexistantTarget()
         {
             List<Change> currencyList = new List<Change>();
-            currencyList.Add(new Change("AUD", "CHF", (decimal)0.9661));
-            currencyList.Add(new Change("JPY", "KWU", (decimal)13.1151));
-            currencyList.Add(new Change("EUR", "CHF", (decimal)1.2053));
-            currencyList.Add(new Change("AUD", "JPY", (decimal)86.0305));
-            currencyList.Add(new Change("EUR", "USD", (decimal)1.2989));
-            currencyList.Add(new Change("JPY", "INR", (decimal)0.6571));
+            currencyList.Add(new Change("AUD", "CHF", 0.9661m));
+            currencyList.Add(new Change("JPY", "KWU", 13.1151m));
+            currencyList.Add(new Change("EUR", "CHF", 1.2053m));
+            currencyList.Add(new Change("AUD", "JPY", 86.0305m));
+            currencyList.Add(new Change("EUR", "USD", 1.2989m));
+            currencyList.Add(new Change("JPY", "INR", 0.6571m));
             PathCalculator pc = new PathCalculator(currencyList, "EUR", "RUB");
 
             IList<Change> rates = pc.Rates();
@@ -112,12 +112,12 @@ namespace ApplicationService.Test
         public void ShouldRetrieveNothing_WhenInexistantSource()
         {
             List<Change> currencyList = new List<Change>();
-            currencyList.Add(new Change("AUD", "CHF", (decimal)0.9661));
-            currencyList.Add(new Change("JPY", "KWU", (decimal)13.1151));
-            currencyList.Add(new Change("EUR", "CHF", (decimal)1.2053));
-            currencyList.Add(new Change("AUD", "JPY", (decimal)86.0305));
-            currencyList.Add(new Change("EUR", "USD", (decimal)1.2989));
-            currencyList.Add(new Change("JPY", "INR", (decimal)0.6571));
+            currencyList.Add(new Change("AUD", "CHF", 0.9661m));
+            currencyList.Add(new Change("JPY", "KWU", 13.1151m));
+            currencyList.Add(new Change("EUR", "CHF", 1.2053m));
+            currencyList.Add(new Change("AUD", "JPY", 86.0305m));
+            currencyList.Add(new Change("EUR", "USD", 1.2989m));
+            currencyList.Add(new Change("JPY", "INR", 0.6571m));
             PathCalculator pc = new PathCalculator(currencyList, "RUB", "EUR");
 
             IList<Change> rates = pc.Rates();
@@ -140,11 +140,11 @@ namespace ApplicationService.Test
         public void ShouldRetrieveNothing_WhenInexistantPath()
         {
             List<Change> currencyList = new List<Change>();
-            currencyList.Add(new Change("AUD", "CHF", (decimal)0.9661));
-            currencyList.Add(new Change("JPY", "KWU", (decimal)13.1151));
-            currencyList.Add(new Change("AUD", "JPY", (decimal)86.0305));
-            currencyList.Add(new Change("EUR", "USD", (decimal)1.2989));
-            currencyList.Add(new Change("JPY", "INR", (decimal)0.6571));
+            currencyList.Add(new Change("AUD", "CHF", 0.9661m));
+            currencyList.Add(new Change("JPY", "KWU", 13.1151m));
+            currencyList.Add(new Change("AUD", "JPY", 86.0305m));
+            currencyList.Add(new Change("EUR", "USD", 1.2989m));
+            currencyList.Add(new Change("JPY", "INR", 0.6571m));
             PathCalculator pc = new PathCalculator(currencyList, "AUD", "USD");
 
             IList<Change> rates = pc.Rates();
