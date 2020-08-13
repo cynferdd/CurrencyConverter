@@ -46,21 +46,21 @@ namespace ApplicationService
             List<List<Change>> results = new List<List<Change>>();
 
             List<Change> possible = remainingPathes.Where(r => r.SourceCurrency == baseCurrency).ToList();
-            List<Change> hits = possible.Where(p => p.TargetCurrency == targetCurrency).ToList();
-            if (hits.Count > 0)
+            List<Change> target = possible.Where(p => p.TargetCurrency == targetCurrency).ToList();
+            if (target.Count > 0)
             {
                 // possible path toward target found
-                possible.RemoveAll(hits.Contains);
-                results.AddRange(hits.Select(hit => new List<Change> { hit }));
+                possible.RemoveAll(target.Contains);
+                results.AddRange(target.Select(hit => new List<Change> { hit }));
             }
 
             Change[] newPathes = remainingPathes.Where(item => !possible.Contains(item)).ToArray();
             foreach (Change possibleRate in possible)
             {
-                List<List<Change>> otherConversions = FindRatesPathes(possibleRate.TargetCurrency, targetCurrency, newPathes);
+                List<List<Change>> foundRatesPathes = FindRatesPathes(possibleRate.TargetCurrency, targetCurrency, newPathes);
                 // insert previous change rate when result found
-                otherConversions.ForEach(result => result.Insert(0, possibleRate));
-                results.AddRange(otherConversions);
+                foundRatesPathes.ForEach(result => result.Insert(0, possibleRate));
+                results.AddRange(foundRatesPathes);
             }
             return results;
         }
