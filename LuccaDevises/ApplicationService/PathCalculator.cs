@@ -22,7 +22,7 @@ namespace ApplicationService
             // adding inversed change rates 
             foreach (var item in currencyPathes)
             {
-                pathes.Add(new Change(item.TargetCurrency, item.SourceCurrency, 1 / item.Rate));
+                pathes.Add(new Change(item.TargetCurrency, item.SourceCurrency, Math.Round(1 / item.Rate, 4)));
             }
             
         }

@@ -34,10 +34,13 @@ namespace ApplicationService.Test
             Assert.Equal(3, rates.Count);
             Assert.Equal("EUR", rates[0].SourceCurrency);
             Assert.Equal("CHF", rates[0].TargetCurrency);
+            Assert.Equal((decimal)1.2053, rates[0].Rate);
             Assert.Equal("CHF", rates[1].SourceCurrency);
             Assert.Equal("AUD", rates[1].TargetCurrency);
+            Assert.Equal((decimal)1.0351, rates[1].Rate);
             Assert.Equal("AUD", rates[2].SourceCurrency);
             Assert.Equal("JPY", rates[2].TargetCurrency);
+            Assert.Equal((decimal)86.0305, rates[2].Rate);
 
         }
 
