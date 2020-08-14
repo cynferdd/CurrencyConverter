@@ -35,7 +35,7 @@ namespace Infrastructure
             bool isValid = (lines != null && lines.Count >= 3);
             if(!isValid)
             {
-                logger.InsufficiantAmountOfLines();
+                logger.MinimumAmountOfLinesNotReached();
             }
             return isValid;
         }

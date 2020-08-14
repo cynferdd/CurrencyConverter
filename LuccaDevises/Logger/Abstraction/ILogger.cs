@@ -6,7 +6,7 @@ namespace Logger.Abstraction
 {
     public interface ILogger
     {
-        void InsufficiantAmountOfLines();
+        void MinimumAmountOfLinesNotReached();
         void FirstLineWrongAmountOfFields();
         void FirstLineWrongFieldsFormat();
         void SecondLineWrongNotPositiveInt();
