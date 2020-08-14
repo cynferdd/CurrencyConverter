@@ -4,6 +4,7 @@ using DomainService;
 using DomainService.Abstractions;
 using Infrastructure;
 using Infrastructure.Abstraction;
+using Logger.Abstraction;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -36,6 +37,7 @@ namespace LuccaDevises
             services.AddScoped<IFileManager, FileManager>();
             services.AddScoped<IFileParser, FileParser>();
             services.AddScoped<IFileValidator, FileValidator>();
+            services.AddScoped<ILogger, Logger.Logger>();
 
             // required to run the application
             services.AddTransient<App>();
