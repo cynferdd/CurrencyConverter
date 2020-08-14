@@ -3,9 +3,7 @@ using DomainService.Abstractions;
 using Infrastructure.Abstraction;
 using Logger.Abstraction;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace ApplicationService.Test

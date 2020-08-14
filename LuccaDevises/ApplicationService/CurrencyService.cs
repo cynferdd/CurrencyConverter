@@ -3,9 +3,7 @@ using Domain;
 using DomainService.Abstractions;
 using Infrastructure.Abstraction;
 using Logger.Abstraction;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ApplicationService
 {

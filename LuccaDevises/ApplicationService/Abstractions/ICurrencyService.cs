@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApplicationService.Abstractions
+﻿namespace ApplicationService.Abstractions
 {
     public interface ICurrencyService
     {

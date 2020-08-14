@@ -1,8 +1,5 @@
-﻿using DomainService.Abstractions;
-using Domain;
-using System;
+﻿using Domain;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 using Logger.Abstraction;
 using Moq;

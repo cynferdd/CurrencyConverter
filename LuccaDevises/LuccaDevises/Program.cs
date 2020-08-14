@@ -5,10 +5,7 @@ using DomainService.Abstractions;
 using Infrastructure;
 using Infrastructure.Abstraction;
 using Logger.Abstraction;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.IO;
 
 namespace LuccaDevises
 {
@@ -28,9 +25,6 @@ namespace LuccaDevises
         {
             IServiceCollection services = new ServiceCollection();
 
-            var config = LoadConfiguration();
-            services.AddSingleton(config);
-
             services.AddScoped<ICurrencyService, CurrencyService>();
             services.AddScoped<IPathCalculator, PathCalculator>();
             services.AddScoped<IRateCalculator, RateCalculator>();
@@ -43,15 +37,6 @@ namespace LuccaDevises
             services.AddTransient<App>();
 
             return services;
-        }
-
-        public static IConfiguration LoadConfiguration()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-            return builder.Build();
         }
     }
 }

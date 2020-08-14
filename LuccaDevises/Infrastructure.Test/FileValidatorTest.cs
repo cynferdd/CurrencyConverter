@@ -1,7 +1,5 @@
-using Infrastructure.Abstraction;
 using Logger.Abstraction;
 using Moq;
-using System;
 using System.Collections.Generic;
 using Xunit;
 
