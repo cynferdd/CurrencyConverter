@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Abstraction;
+using Logger.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,10 +11,10 @@ namespace Infrastructure
 {
     public class FileValidator : IFileValidator
     {
-
-        public FileValidator()
+        private readonly ILogger logger;
+        public FileValidator(ILogger logger)
         {
-            
+            this.logger = logger;
         }
 
         public bool Validate(IList<string> fileLines)
@@ -31,36 +32,66 @@ namespace Infrastructure
 
         public bool CheckHasAtLeast3Lines(IList<string> lines)
         {
-            return lines != null && lines.Count >= 3;
+            bool isValid = (lines != null && lines.Count >= 3);
+            if(!isValid)
+            {
+                logger.InsufficiantAmountOfLines();
+            }
+            return isValid;
         }
 
         public bool CheckFirstLineContains3Fields(IList<string> lines)
         {
-            return CheckLineContains3Fields(lines[0]);
+            bool isValid = CheckLineContains3Fields(lines[0]);
+            if (!isValid)
+            {
+                logger.FirstLineWrongAmountOfFields();
+            }
+            return isValid;
         }
 
         private bool CheckLineContains3Fields(string line)
         {
             return line.Count(str => string.Equals(str, ';')) == 2;
         }
+
         public bool CheckFirstLineFieldsFormat(IList<string> lines)
         {
+             
             var fields = lines[0].Split(";");
-            return fields[0].Length == 3 &&
+
+            bool isValid = fields[0].Length == 3 &&
                 Int32.TryParse(fields[1], out _) &&
                 fields[2].Length == 3;
+
+            if (!isValid)
+            {
+                logger.FirstLineWrongFieldsFormat();
+            }
+
+            return isValid;
         }
 
         public bool CheckSecondLineIsPositiveInt(IList<string> lines)
         {
-            return Int32.TryParse(lines[1], out int resultedInt) && resultedInt > 0;
+            bool isValid = Int32.TryParse(lines[1], out int resultedInt) && resultedInt > 0;
+            if (!isValid)
+            {
+                logger.SecondLineWrongNotPositiveInt();
+            }
+            return isValid;
         }
 
         public bool CheckGoodAmountOfLines(IList<string> lines)
         {
             // we must have the first two lines + the amount defined in line 2
             int nbLines = Convert.ToInt32(lines[1]);
-            return lines.Count == nbLines + 2;
+            bool isValid = (lines.Count == nbLines + 2);
+            if (!isValid)
+            {
+                logger.WrongAmountOfLines();
+            }
+            return isValid;
         }
 
         public bool CheckLastLinesFormat(IList<string> lines)
@@ -72,6 +103,10 @@ namespace Infrastructure
             foreach (var line in lines.Except(exceptList))
             {
                 isFormatOk = isFormatOk && CheckChangeFormat(line);
+            }
+            if (!isFormatOk)
+            {
+                logger.WrongChangeDataFormat();
             }
             return isFormatOk;
         }
@@ -88,6 +123,11 @@ namespace Infrastructure
                     fields[2].Split(".")[1].Length == 4 &&
                     decimal.TryParse(fields[2], NumberStyles.Any, new CultureInfo("en-EN"), out _)
                 ;
+            }
+
+            if (!isFormatOk)
+            {
+                logger.WrongDataLineFormat(line);
             }
             return isFormatOk;
         }

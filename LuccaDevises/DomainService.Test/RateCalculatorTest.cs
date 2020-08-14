@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using Logger.Abstraction;
+using Moq;
 
 namespace DomainService.Test
 {
@@ -12,11 +14,12 @@ namespace DomainService.Test
         [Fact]
         public void ShouldGet59033yens_WhenGiven550Euros()
         {
+            var loggerMock = new Mock<ILogger>();
             List<Change> listeChanges = new List<Change>();
             listeChanges.Add(new Change("EUR", "CHF", 1.2053m));
             listeChanges.Add(new Change("CHF", "AUD", 1.0351m));
             listeChanges.Add(new Change("AUD", "JPY", 86.0305m));
-            RateCalculator rc = new RateCalculator();
+            RateCalculator rc = new RateCalculator(loggerMock.Object);
 
             int calculatedAmount = rc.CalculateChangeRate(550, listeChanges);
 
@@ -27,7 +30,8 @@ namespace DomainService.Test
         [Fact]
         public void ShouldGetSameAmount_WhenGivenNoExchangeRate()
         {
-            RateCalculator rc = new RateCalculator();
+            var loggerMock = new Mock<ILogger>();
+            RateCalculator rc = new RateCalculator(loggerMock.Object);
 
             int calculatedAmount = rc.CalculateChangeRate(550, new List<Change>());
 
@@ -38,7 +42,8 @@ namespace DomainService.Test
         [Fact]
         public void ShouldGetSameAmount_WhenGivenNullExchangeRate()
         {
-            RateCalculator rc = new RateCalculator();
+            var loggerMock = new Mock<ILogger>();
+            RateCalculator rc = new RateCalculator(loggerMock.Object);
 
             int calculatedAmount = rc.CalculateChangeRate(550, null);
 

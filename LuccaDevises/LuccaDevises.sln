@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainService", "DomainServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainService.Test", "DomainService.Test\DomainService.Test.csproj", "{9CBDF41F-4BF3-43B7-9B97-2364D797C932}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{BA2504F1-FF61-4A83-B46B-201F9418030C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{9CBDF41F-4BF3-43B7-9B97-2364D797C932}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CBDF41F-4BF3-43B7-9B97-2364D797C932}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CBDF41F-4BF3-43B7-9B97-2364D797C932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA2504F1-FF61-4A83-B46B-201F9418030C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA2504F1-FF61-4A83-B46B-201F9418030C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA2504F1-FF61-4A83-B46B-201F9418030C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA2504F1-FF61-4A83-B46B-201F9418030C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

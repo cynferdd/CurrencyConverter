@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Infrastructure.Abstraction;
+using Logger.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,10 +12,12 @@ namespace Infrastructure
     {
         private readonly IFileValidator validator;
         private readonly IFileParser parser;
-        public FileManager(IFileValidator fileValidator, IFileParser fileParser)
+        private readonly ILogger logger;
+        public FileManager(IFileValidator fileValidator, IFileParser fileParser, ILogger logger)
         {
             validator = fileValidator;
             parser = fileParser;
+            this.logger = logger;
         }
 
         public BaseData GetData(string filePath)
@@ -32,7 +35,8 @@ namespace Infrastructure
         {
             if (!File.Exists(filePath))
             {
-                throw new FileNotFoundException("file not found : " + filePath);
+                logger.FileNotFound();
+                return null;
             }
             string[] lines = File.ReadAllLines(filePath);
             return lines?.ToList() ?? new List<string>();

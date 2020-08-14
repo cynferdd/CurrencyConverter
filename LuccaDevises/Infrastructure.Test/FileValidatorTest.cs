@@ -1,4 +1,6 @@
 using Infrastructure.Abstraction;
+using Logger.Abstraction;
+using Moq;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -7,11 +9,12 @@ namespace Infrastructure.Test
 {
     public class FileValidatorTest
     {
+        private Mock<ILogger> loggerMock = new Mock<ILogger>();
         [Fact]
         public void ShouldNotBeValid_WhenGivenNullFileContent()
         {
             
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckHasAtLeast3Lines(null);
 
@@ -22,7 +25,7 @@ namespace Infrastructure.Test
         public void ShouldNotBeValid_WhenGivenEmptyFileContent()
         {
 
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckHasAtLeast3Lines(new List<string>());
 
@@ -36,7 +39,7 @@ namespace Infrastructure.Test
             {
                 ""
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckHasAtLeast3Lines(lines);
 
@@ -51,7 +54,7 @@ namespace Infrastructure.Test
                 "",
                 ""
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckHasAtLeast3Lines(lines);
 
@@ -67,7 +70,7 @@ namespace Infrastructure.Test
                 "",
                 ""
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckHasAtLeast3Lines(lines);
 
@@ -81,7 +84,7 @@ namespace Infrastructure.Test
             {
                 ""
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckFirstLineContains3Fields(lines);
 
@@ -95,7 +98,7 @@ namespace Infrastructure.Test
             {
                 "a;a;a;a"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckFirstLineContains3Fields(lines);
 
@@ -109,7 +112,7 @@ namespace Infrastructure.Test
             {
                 "a;a;a"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckFirstLineContains3Fields(lines);
 
@@ -123,7 +126,7 @@ namespace Infrastructure.Test
             {
                 "a;1;a"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
@@ -137,7 +140,7 @@ namespace Infrastructure.Test
             {
                 "abcd;1;a"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
@@ -151,7 +154,7 @@ namespace Infrastructure.Test
             {
                 "abc;Z;a"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
@@ -165,7 +168,7 @@ namespace Infrastructure.Test
             {
                 "abc;2;a"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
@@ -179,7 +182,7 @@ namespace Infrastructure.Test
             {
                 "abc;2;abcd"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
@@ -193,7 +196,7 @@ namespace Infrastructure.Test
             {
                 "abc;2;abc"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
@@ -208,7 +211,7 @@ namespace Infrastructure.Test
                 "abc;2;abcd",
                 "t"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckSecondLineIsPositiveInt(lines);
 
@@ -223,7 +226,7 @@ namespace Infrastructure.Test
                 "abc;2;abcd",
                 "-12"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckSecondLineIsPositiveInt(lines);
 
@@ -238,7 +241,7 @@ namespace Infrastructure.Test
                 "abc;2;abcd",
                 "0"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckSecondLineIsPositiveInt(lines);
 
@@ -253,7 +256,7 @@ namespace Infrastructure.Test
                 "abc;2;abcd",
                 "210"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckSecondLineIsPositiveInt(lines);
 
@@ -269,7 +272,7 @@ namespace Infrastructure.Test
                 "2",
                 ""
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckGoodAmountOfLines(lines);
 
@@ -288,7 +291,7 @@ namespace Infrastructure.Test
                 "",
                 ""
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckGoodAmountOfLines(lines);
 
@@ -306,7 +309,7 @@ namespace Infrastructure.Test
                 "",
                 ""
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckGoodAmountOfLines(lines);
 
@@ -318,7 +321,7 @@ namespace Infrastructure.Test
         {
             string line = "";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -328,7 +331,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usd;3.0000;d";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -338,7 +341,7 @@ namespace Infrastructure.Test
         {
             string line = "eu;usd;3.0000";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -348,7 +351,7 @@ namespace Infrastructure.Test
         {
             string line = "euro;usd;3.0000";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -359,7 +362,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;us;3.0000";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -369,7 +372,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usdollar;3.0000";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -379,7 +382,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usdollar;A";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -389,7 +392,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usdollar;3,4567";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -399,7 +402,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usdollar;3.1";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -409,7 +412,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usd;3.1210";
 
-            bool isValid = new FileValidator().CheckChangeFormat(line);
+            bool isValid = new FileValidator(loggerMock.Object).CheckChangeFormat(line);
 
             Assert.True(isValid);
         }
@@ -425,7 +428,7 @@ namespace Infrastructure.Test
                 "jpy;rub;44.2210",
                 "false"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckLastLinesFormat(lines);
 
@@ -443,7 +446,7 @@ namespace Infrastructure.Test
                 "eur;usd;3.1234",
                 "jpy;rub;44.2210"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.CheckLastLinesFormat(lines);
 
@@ -460,7 +463,7 @@ namespace Infrastructure.Test
                 "eur;usd;3.1234",
                 "jpy;rub;44.2210"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.Validate(lines);
 
@@ -478,7 +481,7 @@ namespace Infrastructure.Test
                 "eur;usd;3.1234",
                 "jpy;rub;44.2210"
             };
-            FileValidator fileValidator = new FileValidator();
+            FileValidator fileValidator = new FileValidator(loggerMock.Object);
 
             bool isValid = fileValidator.Validate(lines);
 

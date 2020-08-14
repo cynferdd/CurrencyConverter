@@ -1,4 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using ApplicationService;
+using ApplicationService.Abstractions;
+using DomainService;
+using DomainService.Abstractions;
+using Infrastructure;
+using Infrastructure.Abstraction;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
@@ -14,7 +20,7 @@ namespace LuccaDevises
             var serviceProvider = services.BuildServiceProvider();
 
             // calls the Run method in App, which is replacing Main
-            serviceProvider.GetService<App>().Run();
+            serviceProvider.GetService<App>().Run(args);
         }
 
         private static IServiceCollection ConfigureServices()
@@ -23,6 +29,13 @@ namespace LuccaDevises
 
             var config = LoadConfiguration();
             services.AddSingleton(config);
+
+            services.AddScoped<ICurrencyService, CurrencyService>();
+            services.AddScoped<IPathCalculator, PathCalculator>();
+            services.AddScoped<IRateCalculator, RateCalculator>();
+            services.AddScoped<IFileManager, FileManager>();
+            services.AddScoped<IFileParser, FileParser>();
+            services.AddScoped<IFileValidator, FileValidator>();
 
             // required to run the application
             services.AddTransient<App>();

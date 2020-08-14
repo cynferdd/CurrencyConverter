@@ -1,6 +1,7 @@
 ﻿using Domain;
 using DomainService.Abstractions;
 using Infrastructure.Abstraction;
+using Logger.Abstraction;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,11 @@ namespace ApplicationService.Test
             var fileManagerMock = new Mock<IFileManager>();
             var pathCalculatorMock = new Mock<IPathCalculator>();
             var rateCalculatorMock = new Mock<IRateCalculator>();
+            var loggerMock = new Mock<ILogger>();
             fileManagerMock
                 .Setup(fm => fm.GetData(It.IsAny<string>()))
                 .Returns((BaseData)null);
-            CurrencyService service = new CurrencyService(fileManagerMock.Object, pathCalculatorMock.Object, rateCalculatorMock.Object);
+            CurrencyService service = new CurrencyService(fileManagerMock.Object, pathCalculatorMock.Object, rateCalculatorMock.Object, loggerMock.Object);
 
             int calculatedAmount = service.CalculateRate("randomPath");
 
@@ -33,13 +35,14 @@ namespace ApplicationService.Test
             var fileManagerMock = new Mock<IFileManager>();
             var pathCalculatorMock = new Mock<IPathCalculator>();
             var rateCalculatorMock = new Mock<IRateCalculator>();
+            var loggerMock = new Mock<ILogger>();
             fileManagerMock
                 .Setup(fm => fm.GetData(It.IsAny<string>()))
                 .Returns(new BaseData(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(),It.IsAny<IList<Change>>()));
             pathCalculatorMock
                 .Setup(pc => pc.Rates(It.IsAny<IList<Change>>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns((IList<Change>)null);
-            CurrencyService service = new CurrencyService(fileManagerMock.Object, pathCalculatorMock.Object, rateCalculatorMock.Object);
+            CurrencyService service = new CurrencyService(fileManagerMock.Object, pathCalculatorMock.Object, rateCalculatorMock.Object, loggerMock.Object);
 
             int calculatedAmount = service.CalculateRate("randomPath");
 
@@ -53,6 +56,7 @@ namespace ApplicationService.Test
             var fileManagerMock = new Mock<IFileManager>();
             var pathCalculatorMock = new Mock<IPathCalculator>();
             var rateCalculatorMock = new Mock<IRateCalculator>();
+            var loggerMock = new Mock<ILogger>();
             fileManagerMock
                 .Setup(fm => fm.GetData(It.IsAny<string>()))
                 .Returns(new BaseData(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<IList<Change>>()));
@@ -62,7 +66,7 @@ namespace ApplicationService.Test
             rateCalculatorMock
                 .Setup(rc => rc.CalculateChangeRate(It.IsAny<int>(), It.IsAny<IList<Change>>()))
                 .Returns(resultedAmount);
-            CurrencyService service = new CurrencyService(fileManagerMock.Object, pathCalculatorMock.Object, rateCalculatorMock.Object);
+            CurrencyService service = new CurrencyService(fileManagerMock.Object, pathCalculatorMock.Object, rateCalculatorMock.Object, loggerMock.Object);
 
             int calculatedAmount = service.CalculateRate("randomPath");
 
