@@ -14,6 +14,11 @@ namespace Infrastructure
 
         }
 
+        /// <summary>
+        /// parsing method. File data validation is done beforehand with the FileValidator
+        /// </summary>
+        /// <param name="lines">lines to parse</param>
+        /// <returns>Base data</returns>
         public BaseData Parse(IList<string> lines)
         {
             var firstFields = lines[0].Split(';');

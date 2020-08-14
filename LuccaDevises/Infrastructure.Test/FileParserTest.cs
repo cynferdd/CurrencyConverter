@@ -24,7 +24,7 @@ namespace Infrastructure.Test
             Assert.Equal("eur", data.InitialCurrency);
             Assert.Equal(2, data.Amount);
             Assert.Equal("usd", data.TargetCurrency);
-            Assert.Equal(2, data?.ChangeRates.Count);
+            Assert.Equal(2, data.ChangeRates.Count);
         }
     }
 }

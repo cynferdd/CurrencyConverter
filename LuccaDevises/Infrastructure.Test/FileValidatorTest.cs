@@ -8,6 +8,7 @@ namespace Infrastructure.Test
     public class FileValidatorTest
     {
         private Mock<ILogger> loggerMock = new Mock<ILogger>();
+
         [Fact]
         public void ShouldNotBeValid_WhenGivenNullFileContent()
         {
