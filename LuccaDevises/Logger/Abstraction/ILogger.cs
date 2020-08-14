@@ -24,5 +24,7 @@ namespace Logger.Abstraction
         void NoChangesPathFound();
 
         void NoDataRetrievedFromFile();
+
+        void Write(string message);
     }
 }

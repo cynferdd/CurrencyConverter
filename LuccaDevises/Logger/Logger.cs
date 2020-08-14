@@ -61,5 +61,10 @@ namespace Logger
         {
             Console.WriteLine("Wrong format on : " + line);
         }
+
+        public void Write(string message)
+        {
+            Console.WriteLine(message);
+        }
     }
 }
