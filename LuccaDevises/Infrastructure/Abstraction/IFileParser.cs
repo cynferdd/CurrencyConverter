@@ -7,6 +7,6 @@ namespace Infrastructure.Abstraction
 {
     public interface IFileParser
     {
-        BaseData Parse();
+        BaseData Parse(IList<string> lines);
     }
 }

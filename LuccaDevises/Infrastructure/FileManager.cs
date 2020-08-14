@@ -9,28 +9,26 @@ namespace Infrastructure
 {
     public class FileManager : IFileManager
     {
-        private readonly string filePath;
         private readonly IFileValidator validator;
         private readonly IFileParser parser;
-        public FileManager(string path, IFileValidator fileValidator, IFileParser fileParser)
+        public FileManager(IFileValidator fileValidator, IFileParser fileParser)
         {
-            filePath = path;
             validator = fileValidator;
             parser = fileParser;
         }
 
-        public BaseData GetData()
+        public BaseData GetData(string filePath)
         {
             BaseData baseData = null;
-            IList<string> lines = Open();
-            if (validator.Validate())
+            IList<string> lines = Open(filePath);
+            if (validator.Validate(lines))
             {
-                baseData = parser.Parse();
+                baseData = parser.Parse(lines);
             }
             return baseData;
         }
 
-        private IList<string> Open()
+        private IList<string> Open(string filePath)
         {
             if (!File.Exists(filePath))
             {

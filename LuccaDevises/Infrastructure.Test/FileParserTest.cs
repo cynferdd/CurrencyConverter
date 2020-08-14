@@ -18,9 +18,9 @@ namespace Infrastructure.Test
                 "eur;jpy;2.1234",
                 "usd;jpy;3.1234",
             };
-            FileParser fileParser = new FileParser(lines);
+            FileParser fileParser = new FileParser();
 
-            BaseData data = fileParser.Parse();
+            BaseData data = fileParser.Parse(lines);
 
             Assert.NotNull(data);
             Assert.Equal("eur", data.InitialCurrency);

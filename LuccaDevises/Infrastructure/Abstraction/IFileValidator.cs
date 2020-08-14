@@ -6,6 +6,6 @@ namespace Infrastructure.Abstraction
 {
     public interface IFileValidator
     {
-        bool Validate();
+        bool Validate(IList<string> fileLines);
     }
 }

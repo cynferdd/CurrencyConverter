@@ -7,6 +7,6 @@ namespace Infrastructure.Abstraction
 {
     public interface IFileManager
     {
-        BaseData GetData();
+        BaseData GetData(string filePath);
     }
 }

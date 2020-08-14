@@ -9,14 +9,13 @@ namespace Infrastructure
 {
     public class FileParser : IFileParser
     {
-        private readonly IList<string> lines;
 
-        public FileParser(IList<string> fileLines)
+        public FileParser()
         {
-            lines = fileLines;
+
         }
 
-        public BaseData Parse()
+        public BaseData Parse(IList<string> lines)
         {
             var firstFields = lines[0].Split(';');
             var nbDataLines = Convert.ToInt32(lines[1]);

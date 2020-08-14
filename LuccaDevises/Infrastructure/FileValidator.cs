@@ -10,31 +10,31 @@ namespace Infrastructure
 {
     public class FileValidator : IFileValidator
     {
-        private readonly IList<string> lines;
 
-        public FileValidator(IList<string> fileLines)
+        public FileValidator()
         {
-            lines = fileLines;
+            
         }
 
-        public bool Validate()
+        public bool Validate(IList<string> fileLines)
         {
-            return CheckHasAtLeast3Lines() &&
-                CheckFirstLineContains3Fields() &&
-                CheckFirstLineFieldsFormat() &&
-                CheckSecondLineIsInt() &&
-                CheckGoodAmountOfLines() &&
-                CheckLastLinesFormat();
+
+            return CheckHasAtLeast3Lines(fileLines) &&
+                CheckFirstLineContains3Fields(fileLines) &&
+                CheckFirstLineFieldsFormat(fileLines) &&
+                CheckSecondLineIsInt(fileLines) &&
+                CheckGoodAmountOfLines(fileLines) &&
+                CheckLastLinesFormat(fileLines);
         }
 
         
 
-        public bool CheckHasAtLeast3Lines()
+        public bool CheckHasAtLeast3Lines(IList<string> lines)
         {
             return lines != null && lines.Count >= 3;
         }
 
-        public bool CheckFirstLineContains3Fields()
+        public bool CheckFirstLineContains3Fields(IList<string> lines)
         {
             return CheckLineContains3Fields(lines[0]);
         }
@@ -43,7 +43,7 @@ namespace Infrastructure
         {
             return line.Count(str => string.Equals(str, ';')) == 2;
         }
-        public bool CheckFirstLineFieldsFormat()
+        public bool CheckFirstLineFieldsFormat(IList<string> lines)
         {
             var fields = lines[0].Split(";");
             return fields[0].Length == 3 &&
@@ -51,19 +51,19 @@ namespace Infrastructure
                 fields[2].Length == 3;
         }
 
-        public bool CheckSecondLineIsInt()
+        public bool CheckSecondLineIsInt(IList<string> lines)
         {
             return Int32.TryParse(lines[1], out _);
         }
 
-        public bool CheckGoodAmountOfLines()
+        public bool CheckGoodAmountOfLines(IList<string> lines)
         {
             // we must have the first two lines + the amount defined in line 2
             int nbLines = Convert.ToInt32(lines[1]);
             return lines.Count == nbLines + 2;
         }
 
-        public bool CheckLastLinesFormat()
+        public bool CheckLastLinesFormat(IList<string> lines)
         {
             bool isFormatOk = true;
             var exceptList = new List<string>();

@@ -11,9 +11,9 @@ namespace Infrastructure.Test
         public void ShouldNotBeValid_WhenGivenNullFileContent()
         {
             
-            FileValidator fileValidator = new FileValidator(null);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckHasAtLeast3Lines();
+            bool isValid = fileValidator.CheckHasAtLeast3Lines(null);
 
             Assert.False(isValid);
         }
@@ -22,9 +22,9 @@ namespace Infrastructure.Test
         public void ShouldNotBeValid_WhenGivenEmptyFileContent()
         {
 
-            FileValidator fileValidator = new FileValidator(new List<string>());
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckHasAtLeast3Lines();
+            bool isValid = fileValidator.CheckHasAtLeast3Lines(new List<string>());
 
             Assert.False(isValid);
         }
@@ -36,9 +36,9 @@ namespace Infrastructure.Test
             {
                 ""
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckHasAtLeast3Lines();
+            bool isValid = fileValidator.CheckHasAtLeast3Lines(lines);
 
             Assert.False(isValid);
         }
@@ -51,9 +51,9 @@ namespace Infrastructure.Test
                 "",
                 ""
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckHasAtLeast3Lines();
+            bool isValid = fileValidator.CheckHasAtLeast3Lines(lines);
 
             Assert.False(isValid);
         }
@@ -67,9 +67,9 @@ namespace Infrastructure.Test
                 "",
                 ""
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckHasAtLeast3Lines();
+            bool isValid = fileValidator.CheckHasAtLeast3Lines(lines);
 
             Assert.True(isValid);
         }
@@ -81,9 +81,9 @@ namespace Infrastructure.Test
             {
                 ""
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckFirstLineContains3Fields();
+            bool isValid = fileValidator.CheckFirstLineContains3Fields(lines);
 
             Assert.False(isValid);
         }
@@ -95,9 +95,9 @@ namespace Infrastructure.Test
             {
                 "a;a;a;a"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckFirstLineContains3Fields();
+            bool isValid = fileValidator.CheckFirstLineContains3Fields(lines);
 
             Assert.False(isValid);
         }
@@ -109,9 +109,9 @@ namespace Infrastructure.Test
             {
                 "a;a;a"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckFirstLineContains3Fields();
+            bool isValid = fileValidator.CheckFirstLineContains3Fields(lines);
 
             Assert.True(isValid);
         }
@@ -123,9 +123,9 @@ namespace Infrastructure.Test
             {
                 "a;1;a"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckFirstLineFieldsFormat();
+            bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
             Assert.False(isValid);
         }
@@ -137,9 +137,9 @@ namespace Infrastructure.Test
             {
                 "abcd;1;a"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckFirstLineFieldsFormat();
+            bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
             Assert.False(isValid);
         }
@@ -151,9 +151,9 @@ namespace Infrastructure.Test
             {
                 "abc;Z;a"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckFirstLineFieldsFormat();
+            bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
             Assert.False(isValid);
         }
@@ -165,9 +165,9 @@ namespace Infrastructure.Test
             {
                 "abc;2;a"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckFirstLineFieldsFormat();
+            bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
             Assert.False(isValid);
         }
@@ -179,9 +179,9 @@ namespace Infrastructure.Test
             {
                 "abc;2;abcd"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckFirstLineFieldsFormat();
+            bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
             Assert.False(isValid);
         }
@@ -193,9 +193,9 @@ namespace Infrastructure.Test
             {
                 "abc;2;abc"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckFirstLineFieldsFormat();
+            bool isValid = fileValidator.CheckFirstLineFieldsFormat(lines);
 
             Assert.True(isValid);
         }
@@ -208,9 +208,9 @@ namespace Infrastructure.Test
                 "abc;2;abcd",
                 "t"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckSecondLineIsInt();
+            bool isValid = fileValidator.CheckSecondLineIsInt(lines);
 
             Assert.False(isValid);
         }
@@ -223,9 +223,9 @@ namespace Infrastructure.Test
                 "abc;2;abcd",
                 "210"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckSecondLineIsInt();
+            bool isValid = fileValidator.CheckSecondLineIsInt(lines);
 
             Assert.True(isValid);
         }
@@ -239,9 +239,9 @@ namespace Infrastructure.Test
                 "2",
                 ""
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckGoodAmountOfLines();
+            bool isValid = fileValidator.CheckGoodAmountOfLines(lines);
 
             Assert.False(isValid);
         }
@@ -258,9 +258,9 @@ namespace Infrastructure.Test
                 "",
                 ""
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckGoodAmountOfLines();
+            bool isValid = fileValidator.CheckGoodAmountOfLines(lines);
 
             Assert.False(isValid);
         }
@@ -276,9 +276,9 @@ namespace Infrastructure.Test
                 "",
                 ""
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckGoodAmountOfLines();
+            bool isValid = fileValidator.CheckGoodAmountOfLines(lines);
 
             Assert.True(isValid);
         }
@@ -288,7 +288,7 @@ namespace Infrastructure.Test
         {
             string line = "";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -298,7 +298,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usd;3.0000;d";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -308,7 +308,7 @@ namespace Infrastructure.Test
         {
             string line = "eu;usd;3.0000";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -318,7 +318,7 @@ namespace Infrastructure.Test
         {
             string line = "euro;usd;3.0000";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -329,7 +329,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;us;3.0000";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -339,7 +339,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usdollar;3.0000";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -349,7 +349,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usdollar;A";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -359,7 +359,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usdollar;3,4567";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -369,7 +369,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usdollar;3.1";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.False(isValid);
         }
@@ -379,7 +379,7 @@ namespace Infrastructure.Test
         {
             string line = "eur;usd;3.1210";
 
-            bool isValid = new FileValidator(null).CheckChangeFormat(line);
+            bool isValid = new FileValidator().CheckChangeFormat(line);
 
             Assert.True(isValid);
         }
@@ -395,9 +395,9 @@ namespace Infrastructure.Test
                 "jpy;rub;44.2210",
                 "false"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckLastLinesFormat();
+            bool isValid = fileValidator.CheckLastLinesFormat(lines);
 
             Assert.False(isValid);
         }
@@ -413,9 +413,9 @@ namespace Infrastructure.Test
                 "eur;usd;3.1234",
                 "jpy;rub;44.2210"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckLastLinesFormat();
+            bool isValid = fileValidator.CheckLastLinesFormat(lines);
 
             Assert.True(isValid);
         }
@@ -430,9 +430,9 @@ namespace Infrastructure.Test
                 "eur;usd;3.1234",
                 "jpy;rub;44.2210"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.Validate();
+            bool isValid = fileValidator.Validate(lines);
 
             Assert.False(isValid);
         }
@@ -448,9 +448,9 @@ namespace Infrastructure.Test
                 "eur;usd;3.1234",
                 "jpy;rub;44.2210"
             };
-            FileValidator fileValidator = new FileValidator(lines);
+            FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.Validate();
+            bool isValid = fileValidator.Validate(lines);
 
             Assert.True(isValid);
         }
