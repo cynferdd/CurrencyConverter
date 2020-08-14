@@ -27,7 +27,12 @@ namespace Infrastructure
         }
 
         
-
+        /// <summary>
+        /// file must have at least 3 lines to be valid. 
+        /// First two are mandatory, third is the first data line.
+        /// </summary>
+        /// <param name="lines">text file lines</param>
+        /// <returns>is it valid ?</returns>
         public bool CheckHasAtLeast3Lines(IList<string> lines)
         {
             bool isValid = (lines != null && lines.Count >= 3);
@@ -38,6 +43,11 @@ namespace Infrastructure
             return isValid;
         }
 
+        /// <summary>
+        /// First line must contain 3 fields
+        /// </summary>
+        /// <param name="lines">text file lines</param>
+        /// <returns>is it valid ?</returns>
         public bool CheckFirstLineContains3Fields(IList<string> lines)
         {
             bool isValid = CheckLineContains3Fields(lines[0]);
@@ -48,11 +58,22 @@ namespace Infrastructure
             return isValid;
         }
 
+        /// <summary>
+        /// generic method when lines must contain 3 fields
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns>is it valid ?</returns>
         private bool CheckLineContains3Fields(string line)
         {
             return line.Count(str => string.Equals(str, ';')) == 2;
         }
 
+        /// <summary>
+        /// First line format must be : 
+        /// CUR;amount(integer);CUR
+        /// </summary>
+        /// <param name="lines">text file lines</param>
+        /// <returns>is it valid ?</returns>
         public bool CheckFirstLineFieldsFormat(IList<string> lines)
         {
              
@@ -71,6 +92,11 @@ namespace Infrastructure
             return isValid;
         }
 
+        /// <summary>
+        /// Second line must be a positive integer
+        /// </summary>
+        /// <param name="lines">text file lines</param>
+        /// <returns>is it valid ?</returns>
         public bool CheckSecondLineIsPositiveInt(IList<string> lines)
         {
             bool isValid = Int32.TryParse(lines[1], out int resultedInt) && resultedInt > 0;
@@ -81,9 +107,13 @@ namespace Infrastructure
             return isValid;
         }
 
+        /// <summary>
+        /// the total amount of lines must the amount defined in line 2 + the First two mandatory lines
+        /// </summary>
+        /// <param name="lines">text file lines</param>
+        /// <returns>is it valid ?</returns>
         public bool CheckGoodAmountOfLines(IList<string> lines)
         {
-            // we must have the first two lines + the amount defined in line 2
             int nbLines = Convert.ToInt32(lines[1]);
             bool isValid = (lines.Count == nbLines + 2);
             if (!isValid)
@@ -93,6 +123,12 @@ namespace Infrastructure
             return isValid;
         }
 
+        /// <summary>
+        /// global method verifying if all data lines are correctly formatted
+        /// line 1 and 2 are excluded from this check.
+        /// </summary>
+        /// <param name="lines">text file lines</param>
+        /// <returns>is it valid ?</returns>
         public bool CheckLastLinesFormat(IList<string> lines)
         {
             bool isFormatOk = true;
@@ -110,13 +146,20 @@ namespace Infrastructure
             return isFormatOk;
         }
 
+        /// <summary>
+        /// A data line must be formatted as such : 
+        /// CUR;CUR;decimal(formatted like 0.0000)
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns>is it valid ?</returns>
         public bool CheckChangeFormat(string line)
         {
             bool isFormatOk = CheckLineContains3Fields(line);
             if (isFormatOk)
             {
                 var fields = line.Split(";");
-                isFormatOk = fields[0].Length == 3 &&
+                isFormatOk = 
+                    fields[0].Length == 3 &&
                     fields[1].Length == 3 &&
                     fields[2].Count(str => string.Equals(str, '.')) == 1 &&
                     fields[2].Split(".")[1].Length == 4 &&
