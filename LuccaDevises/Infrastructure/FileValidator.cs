@@ -22,7 +22,7 @@ namespace Infrastructure
             return CheckHasAtLeast3Lines(fileLines) &&
                 CheckFirstLineContains3Fields(fileLines) &&
                 CheckFirstLineFieldsFormat(fileLines) &&
-                CheckSecondLineIsInt(fileLines) &&
+                CheckSecondLineIsPositiveInt(fileLines) &&
                 CheckGoodAmountOfLines(fileLines) &&
                 CheckLastLinesFormat(fileLines);
         }
@@ -51,9 +51,9 @@ namespace Infrastructure
                 fields[2].Length == 3;
         }
 
-        public bool CheckSecondLineIsInt(IList<string> lines)
+        public bool CheckSecondLineIsPositiveInt(IList<string> lines)
         {
-            return Int32.TryParse(lines[1], out _);
+            return Int32.TryParse(lines[1], out int resultedInt) && resultedInt > 0;
         }
 
         public bool CheckGoodAmountOfLines(IList<string> lines)

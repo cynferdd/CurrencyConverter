@@ -210,13 +210,43 @@ namespace Infrastructure.Test
             };
             FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckSecondLineIsInt(lines);
+            bool isValid = fileValidator.CheckSecondLineIsPositiveInt(lines);
 
             Assert.False(isValid);
         }
 
         [Fact]
-        public void ShouldBeValid_WhenSecondLineIsAnInteger()
+        public void ShouldNotBeValid_WhenSecondLineIsANegativeInteger()
+        {
+            List<string> lines = new List<string>
+            {
+                "abc;2;abcd",
+                "-12"
+            };
+            FileValidator fileValidator = new FileValidator();
+
+            bool isValid = fileValidator.CheckSecondLineIsPositiveInt(lines);
+
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void ShouldBeValid_WhenSecondLineIsZero()
+        {
+            List<string> lines = new List<string>
+            {
+                "abc;2;abcd",
+                "0"
+            };
+            FileValidator fileValidator = new FileValidator();
+
+            bool isValid = fileValidator.CheckSecondLineIsPositiveInt(lines);
+
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void ShouldBeValid_WhenSecondLineIsAPositiveInteger()
         {
             List<string> lines = new List<string>
             {
@@ -225,7 +255,7 @@ namespace Infrastructure.Test
             };
             FileValidator fileValidator = new FileValidator();
 
-            bool isValid = fileValidator.CheckSecondLineIsInt(lines);
+            bool isValid = fileValidator.CheckSecondLineIsPositiveInt(lines);
 
             Assert.True(isValid);
         }
