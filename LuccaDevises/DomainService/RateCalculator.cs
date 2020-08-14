@@ -1,22 +1,19 @@
-﻿using ApplicationService.Abstractions;
+﻿using DomainService.Abstractions;
 using Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationService
+namespace DomainService
 {
     public class RateCalculator : IRateCalculator
     {
 
-        private readonly IList<Change> changes;
-        
-        public RateCalculator(IPathCalculator pathCalculator)
+        public RateCalculator()
         {
-            changes = pathCalculator.Rates();
             
         }
-        public int CalculateChangeRate(int amount)
+        public int CalculateChangeRate(int amount, IList<Change> changes)
         {
             decimal convertedRate = amount;
             if (changes != null)

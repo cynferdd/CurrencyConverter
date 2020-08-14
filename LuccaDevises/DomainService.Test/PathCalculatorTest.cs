@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace ApplicationService.Test
+namespace DomainService.Test
 {
     public class PathCalculatorTest
     {
@@ -27,9 +27,9 @@ namespace ApplicationService.Test
             currencyList.Add(new Change("AUD", "JPY", 86.0305m));
             currencyList.Add(new Change("EUR", "USD", 1.2989m));
             currencyList.Add(new Change("JPY", "INR", 0.6571m));
-            PathCalculator pc = new PathCalculator(currencyList, "EUR", "JPY");
+            PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.Rates();
+            IList<Change> rates = pc.Rates(currencyList, "EUR", "JPY");
 
             Assert.Equal(3, rates.Count);
             Assert.Equal("EUR", rates[0].SourceCurrency);
@@ -65,9 +65,9 @@ namespace ApplicationService.Test
             currencyList.Add(new Change("EUR", "USD", 1.2989m));
             currencyList.Add(new Change("JPY", "INR", 0.6571m));
             currencyList.Add(new Change("EUR", "KWU", 1m));
-            PathCalculator pc = new PathCalculator(currencyList, "EUR", "JPY");
+            PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.Rates();
+            IList<Change> rates = pc.Rates(currencyList, "EUR", "JPY");
 
             Assert.Equal(2, rates.Count);
             Assert.Equal("EUR", rates[0].SourceCurrency);
@@ -82,9 +82,9 @@ namespace ApplicationService.Test
         public void ShouldRetrieveNothing_WhenCurrencyListEmpty()
         {
             
-            PathCalculator pc = new PathCalculator(new List<Change>(), "EUR", "JPY");
+            PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.Rates();
+            IList<Change> rates = pc.Rates(new List<Change>(), "EUR", "JPY");
 
             Assert.Null(rates);
             
@@ -100,9 +100,9 @@ namespace ApplicationService.Test
             currencyList.Add(new Change("AUD", "JPY", 86.0305m));
             currencyList.Add(new Change("EUR", "USD", 1.2989m));
             currencyList.Add(new Change("JPY", "INR", 0.6571m));
-            PathCalculator pc = new PathCalculator(currencyList, "EUR", "RUB");
+            PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.Rates();
+            IList<Change> rates = pc.Rates(currencyList, "EUR", "RUB");
 
             Assert.Null(rates);
 
@@ -118,9 +118,9 @@ namespace ApplicationService.Test
             currencyList.Add(new Change("AUD", "JPY", 86.0305m));
             currencyList.Add(new Change("EUR", "USD", 1.2989m));
             currencyList.Add(new Change("JPY", "INR", 0.6571m));
-            PathCalculator pc = new PathCalculator(currencyList, "RUB", "EUR");
+            PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.Rates();
+            IList<Change> rates = pc.Rates(currencyList, "RUB", "EUR");
 
             Assert.Null(rates);
 
@@ -145,9 +145,9 @@ namespace ApplicationService.Test
             currencyList.Add(new Change("AUD", "JPY", 86.0305m));
             currencyList.Add(new Change("EUR", "USD", 1.2989m));
             currencyList.Add(new Change("JPY", "INR", 0.6571m));
-            PathCalculator pc = new PathCalculator(currencyList, "AUD", "USD");
+            PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.Rates();
+            IList<Change> rates = pc.Rates(currencyList, "AUD", "USD");
 
             Assert.Null(rates);
 

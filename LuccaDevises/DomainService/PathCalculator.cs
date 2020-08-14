@@ -1,35 +1,33 @@
-﻿using ApplicationService.Abstractions;
+﻿using DomainService.Abstractions;
 using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ApplicationService
+namespace DomainService
 {
     public class PathCalculator : IPathCalculator
     {
         
-        private readonly string source;
-        private readonly string target;
-        public List<Change> pathes = new List<Change>();
-        public PathCalculator(List<Change> currencyPathes, string sourceCurrency, string targetCurrency)
+        
+        public PathCalculator()
         {
-            source = sourceCurrency;
-            target = targetCurrency;
+                        
+        }
+        
+
+        public IList<Change> Rates(List<Change> currencyPathes, string source, string target)
+        {
+            List<Change> pathes = new List<Change>();
             pathes.AddRange(currencyPathes);
 
-            // adding inversed change rates 
+            // adding inversed change rates to get all pathes and better performances
             foreach (var item in currencyPathes)
             {
                 pathes.Add(new Change(item.TargetCurrency, item.SourceCurrency, Math.Round(1 / item.Rate, 4)));
             }
-            
-        }
-        
 
-        public IList<Change> Rates()
-        {
             List<List<Change>> foundPathes = FindRatesPathes(source, target, pathes.ToArray());
             return foundPathes.OrderBy(m => m.Count).FirstOrDefault();
         }
