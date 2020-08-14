@@ -20,9 +20,9 @@ namespace ApplicationService.Test
             var mock = new Mock<IPathCalculator>();
             mock.Setup(pc => pc.Rates())
                 .Returns(listeChanges);
-            RateCalculator rc = new RateCalculator(mock.Object, 550);
+            RateCalculator rc = new RateCalculator(mock.Object);
 
-            int calculatedAmount = rc.CalculateChangeRate();
+            int calculatedAmount = rc.CalculateChangeRate(550);
 
             Assert.Equal(59033, calculatedAmount);
 
@@ -34,9 +34,9 @@ namespace ApplicationService.Test
             var mock = new Mock<IPathCalculator>();
             mock.Setup(pc => pc.Rates())
                 .Returns(new List<Change>());
-            RateCalculator rc = new RateCalculator(mock.Object, 550);
+            RateCalculator rc = new RateCalculator(mock.Object);
 
-            int calculatedAmount = rc.CalculateChangeRate();
+            int calculatedAmount = rc.CalculateChangeRate(550);
 
             Assert.Equal(550, calculatedAmount);
 
@@ -48,9 +48,9 @@ namespace ApplicationService.Test
             var mock = new Mock<IPathCalculator>();
             mock.Setup(pc => pc.Rates())
                 .Returns((IList<Change>)null);
-            RateCalculator rc = new RateCalculator(mock.Object, 550);
+            RateCalculator rc = new RateCalculator(mock.Object);
 
-            int calculatedAmount = rc.CalculateChangeRate();
+            int calculatedAmount = rc.CalculateChangeRate(550);
 
             Assert.Equal(550, calculatedAmount);
 

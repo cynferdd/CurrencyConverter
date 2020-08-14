@@ -10,15 +10,15 @@ namespace ApplicationService
     {
 
         private readonly IList<Change> changes;
-        private readonly int baseAmount;
-        public RateCalculator(IPathCalculator pathCalculator, int amount)
+        
+        public RateCalculator(IPathCalculator pathCalculator)
         {
             changes = pathCalculator.Rates();
-            baseAmount = amount;
+            
         }
-        public int CalculateChangeRate()
+        public int CalculateChangeRate(int amount)
         {
-            decimal convertedRate = baseAmount;
+            decimal convertedRate = amount;
             if (changes != null)
             {
                 foreach (var item in changes)

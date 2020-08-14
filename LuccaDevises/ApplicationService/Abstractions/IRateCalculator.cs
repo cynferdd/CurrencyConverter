@@ -6,6 +6,6 @@ namespace ApplicationService.Abstractions
 {
     public interface IRateCalculator
     {
-        int CalculateChangeRate();
+        int CalculateChangeRate(int amount);
     }
 }
