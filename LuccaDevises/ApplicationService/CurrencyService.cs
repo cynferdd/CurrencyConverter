@@ -28,7 +28,7 @@ namespace ApplicationService
                 IList<Change> conversionPath = pathCalculator.Rates(data.ChangeRates, data.InitialCurrency, data.TargetCurrency);
                 if (conversionPath != null)
                 {
-                    rateCalculator.CalculateChangeRate(data.Amount, conversionPath);
+                    convertedAmount = rateCalculator.CalculateChangeRate(data.Amount, conversionPath);
                 }
             }
             
