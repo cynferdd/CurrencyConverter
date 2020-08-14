@@ -13,6 +13,7 @@ namespace DomainService
         {
             this.logger = logger;
         }
+
         public int CalculateChangeRate(int amount, IList<Change> changes)
         {
             decimal convertedRate = amount;

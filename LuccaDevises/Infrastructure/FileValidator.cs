@@ -58,7 +58,8 @@ namespace Infrastructure
              
             var fields = lines[0].Split(";");
 
-            bool isValid = fields[0].Length == 3 &&
+            bool isValid = 
+                fields[0].Length == 3 &&
                 Int32.TryParse(fields[1], out _) &&
                 fields[2].Length == 3;
 

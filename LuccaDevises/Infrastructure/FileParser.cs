@@ -19,6 +19,7 @@ namespace Infrastructure
             var firstFields = lines[0].Split(';');
             var nbDataLines = Convert.ToInt32(lines[1]);
             List<Change> data = new List<Change>();
+
             // we exclude the first 2 lines for the data parse
             for (int i = 2; i < nbDataLines + 2; i++)
             {

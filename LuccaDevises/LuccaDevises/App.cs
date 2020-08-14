@@ -16,19 +16,18 @@ namespace LuccaDevises
 
         public void Run(string[] args)
         {
-            int calculatedAmount = 0;
-
             if (args.Length == 0)
             {
                 logger.FilePathNeeded();
                 return;
             }
-            
+
+            int calculatedAmount;
             try
             {
-                service.CalculateRate(args[0]);
+                calculatedAmount = service.CalculateRate(args[0]);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 logger.Write(e.Message);
                 return;
