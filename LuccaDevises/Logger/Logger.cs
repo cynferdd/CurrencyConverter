@@ -5,11 +5,17 @@ namespace Logger
 {
     public class Logger : ILogger
     {
+        public void FilePathNeeded()
+        {
+            Console.WriteLine("File path needed.");
+        }
+
         public void FileNotFound()
         {
             Console.WriteLine("File not found.");
         }
 
+        
         public void FirstLineWrongAmountOfFields()
         {
             Console.WriteLine("The first line needs to contain exactly 3 fields.");

@@ -1,4 +1,5 @@
 ﻿using ApplicationService.Abstractions;
+using Logger.Abstraction;
 using System;
 
 namespace LuccaDevises
@@ -6,15 +7,18 @@ namespace LuccaDevises
     public class App
     {
         private readonly ICurrencyService service;
-        public App(ICurrencyService currencyService)
+        private readonly ILogger logger;
+        public App(ICurrencyService currencyService, ILogger logger)
         {
             service = currencyService;
+            this.logger = logger;
         }
+
         public void Run(string[] args)
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("File Path Needed");
+                logger.FilePathNeeded();
                 return;
             }
             int calculatedAmount = service.CalculateRate(args[0]);
