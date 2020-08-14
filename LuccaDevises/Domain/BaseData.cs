@@ -8,13 +8,13 @@ namespace Domain
     {
         public string InitialCurrency { get; private set; }
 
-        public decimal Amount { get; private set; }
+        public int Amount { get; private set; }
 
         public string TargetCurrency { get; private set; }
 
         public IList<Change> ChangeRates { get; private set; }
 
-        public BaseData(string initialCurrency, decimal amount, string targetCurrency, IList<Change> changeRates)
+        public BaseData(string initialCurrency, int amount, string targetCurrency, IList<Change> changeRates)
         {
             InitialCurrency = initialCurrency;
             Amount = amount;

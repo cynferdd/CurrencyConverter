@@ -7,6 +7,6 @@ namespace DomainService.Abstractions
 {
     public interface IPathCalculator
     {
-        IList<Change> Rates(List<Change> currencyPathes, string source, string target);
+        IList<Change> Rates(IList<Change> currencyPathes, string source, string target);
     }
 }

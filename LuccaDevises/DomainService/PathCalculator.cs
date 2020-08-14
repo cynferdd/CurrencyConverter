@@ -17,7 +17,7 @@ namespace DomainService
         }
         
 
-        public IList<Change> Rates(List<Change> currencyPathes, string source, string target)
+        public IList<Change> Rates(IList<Change> currencyPathes, string source, string target)
         {
             List<Change> pathes = new List<Change>();
             pathes.AddRange(currencyPathes);
