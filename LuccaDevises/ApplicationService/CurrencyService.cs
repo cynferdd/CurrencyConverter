@@ -26,7 +26,7 @@ namespace ApplicationService
             BaseData data = fileManager.GetData(filePath);
             if (data != null)
             {
-                IList<Change> conversionPath = pathCalculator.Rates(data.ChangeRates, data.InitialCurrency, data.TargetCurrency);
+                IList<Change> conversionPath = pathCalculator.GetRatesPathes(data.ChangeRates, data.InitialCurrency, data.TargetCurrency);
                 if (conversionPath != null)
                 {
                     convertedAmount = rateCalculator.CalculateChangeRate(data.Amount, conversionPath);

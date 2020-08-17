@@ -20,7 +20,7 @@ namespace DomainService
         /// <param name="source">source currency</param>
         /// <param name="target">target currency</param>
         /// <returns>shortest path from source currency to target currency</returns>
-        public IList<Change> Rates(IList<Change> currencyPathes, string source, string target)
+        public IList<Change> GetRatesPathes(IList<Change> currencyPathes, string source, string target)
         {
             List<Change> pathes = new List<Change>();
             pathes.AddRange(currencyPathes);

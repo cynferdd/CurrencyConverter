@@ -38,7 +38,7 @@ namespace ApplicationService.Test
                 .Setup(fm => fm.GetData(It.IsAny<string>()))
                 .Returns(new BaseData(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(),It.IsAny<IList<Change>>()));
             pathCalculatorMock
-                .Setup(pc => pc.Rates(It.IsAny<IList<Change>>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Setup(pc => pc.GetRatesPathes(It.IsAny<IList<Change>>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns((IList<Change>)null);
             CurrencyService service = new CurrencyService(fileManagerMock.Object, pathCalculatorMock.Object, rateCalculatorMock.Object, loggerMock.Object);
 
@@ -59,7 +59,7 @@ namespace ApplicationService.Test
                 .Setup(fm => fm.GetData(It.IsAny<string>()))
                 .Returns(new BaseData(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<IList<Change>>()));
             pathCalculatorMock
-                .Setup(pc => pc.Rates(It.IsAny<IList<Change>>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Setup(pc => pc.GetRatesPathes(It.IsAny<IList<Change>>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(new List<Change>());
             rateCalculatorMock
                 .Setup(rc => rc.CalculateChangeRate(It.IsAny<int>(), It.IsAny<IList<Change>>()))
