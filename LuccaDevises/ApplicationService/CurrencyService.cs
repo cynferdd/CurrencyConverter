@@ -13,11 +13,11 @@ namespace ApplicationService
         private readonly IPathCalculator _pathCalculator;
         private readonly IRateCalculator _rateCalculator;
         private readonly ILogger _logger;
-        public CurrencyService(IFileManager manager, IPathCalculator pCalculator, IRateCalculator rCalculator, ILogger logger)
+        public CurrencyService(IFileManager manager, IPathCalculator pathCalculator, IRateCalculator rateCalculator, ILogger logger)
         {
             _fileManager = manager;
-            _pathCalculator = pCalculator;
-            _rateCalculator = rCalculator;
+            _pathCalculator = pathCalculator;
+            _rateCalculator = rateCalculator;
             _logger = logger;
         }
         public int ProcessConversion(string filePath)
