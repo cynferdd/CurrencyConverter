@@ -22,26 +22,22 @@ namespace ApplicationService
         }
         public int CalculateRate(string filePath)
         {
-            int convertedAmount = 0;
             BaseData data = fileManager.GetData(filePath);
-            if (data != null)
-            {
-                IList<Change> conversionPath = pathCalculator.GetRatesPathes(data.ChangeRates, data.InitialCurrency, data.TargetCurrency);
-                if (conversionPath != null)
-                {
-                    convertedAmount = rateCalculator.CalculateChangeRate(data.Amount, conversionPath);
-                }
-                else
-                {
-                    logger.NoChangesPathFound();
-                }
-            }
-            else
+            if (data == null)
             {
                 logger.NoDataRetrievedFromFile();
+                return 0;
             }
-            
-            return convertedAmount;
+
+            IList<Change> conversionPath = pathCalculator.GetRatesPathes(data.ChangeRates, data.InitialCurrency, data.TargetCurrency);
+            if (conversionPath == null)
+            {
+                logger.NoChangesPathFound();
+                return 0;
+                
+            }
+
+            return rateCalculator.CalculateChangeRate(data.Amount, conversionPath);
         }
     }
 }
