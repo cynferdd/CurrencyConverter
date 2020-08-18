@@ -26,7 +26,7 @@ namespace DomainService
             }
             else
             {
-                logger.NoChangesPathFound();
+                logger.NoConversionPathFound();
             }
             return Convert.ToInt32(Math.Round(convertedRate, 0));
         }

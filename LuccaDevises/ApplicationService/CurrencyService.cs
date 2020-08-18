@@ -32,7 +32,7 @@ namespace ApplicationService
             IList<Change> conversionPath = pathCalculator.GetRatesPathes(data.ChangeRates, data.InitialCurrency, data.TargetCurrency);
             if (conversionPath == null)
             {
-                logger.NoChangesPathFound();
+                logger.NoConversionPathFound();
                 return 0;
                 
             }

@@ -31,7 +31,7 @@ namespace Logger
             Console.WriteLine("The file must contain at least 3 lines.");
         }
 
-        public void NoChangesPathFound()
+        public void NoConversionPathFound()
         {
             Console.WriteLine("No path found from source currency to target currency.");
         }

@@ -21,7 +21,7 @@ namespace Logger.Abstraction
 
         void FileNotFound();
 
-        void NoChangesPathFound();
+        void NoConversionPathFound();
 
         void NoDataRetrievedFromFile();
 
