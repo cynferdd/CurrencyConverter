@@ -11,11 +11,11 @@ namespace Domain
 
         private readonly decimal _rate;
 
-        public Change(string source, string target, decimal rate)
+        public Change(string sourceCurrency, string targetCurrency, decimal conversionRate)
         {
-            SourceCurrency = source;
-            TargetCurrency = target;
-            _rate = rate;
+            SourceCurrency = sourceCurrency;
+            TargetCurrency = targetCurrency;
+            _rate = conversionRate;
         }
 
         public decimal Convert(decimal amount)

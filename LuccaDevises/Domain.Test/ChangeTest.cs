@@ -71,5 +71,17 @@ namespace Domain.Test
             
             Assert.True(hashCode > -1);
         }
+
+        [Fact]
+        public void ShouldGetInvertedRate_WhenInvertingChange()
+        {
+            Change change = new Change("EUR", "USD", 2.5m);
+            Change expectedInvertedChange = new Change("USD", "EUR", Math.Round((1/2.5m), 4));
+
+            Change invertedChange = change.Invert();
+
+            Assert.Equal(expectedInvertedChange, invertedChange);
+            
+        }
     }
 }
