@@ -13,6 +13,7 @@ namespace DomainService
 
         }
 
+        
         /// <summary>
         /// Retrieving the shortest path from a source currency to a target currency, given a set of adjacent edges in a graph
         /// </summary>
@@ -20,7 +21,7 @@ namespace DomainService
         /// <param name="source">source currency</param>
         /// <param name="target">target currency</param>
         /// <returns>shortest path from source currency to target currency</returns>
-        public IList<Change> GetRatesPathes(IList<Change> currencyPathes, string source, string target)
+        public IList<Change> GetConversionRatePath(IList<Change> currencyPathes, string source, string target)
         {
             List<Change> pathes = new List<Change>();
             pathes.AddRange(currencyPathes);

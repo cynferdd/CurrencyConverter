@@ -5,6 +5,6 @@ namespace DomainService.Abstractions
 {
     public interface IRateCalculator
     {
-        int CalculateChangeRate(int amount, IList<Change> changes);
+        int ConvertAmount(int amount, IList<Change> changes);
     }
 }

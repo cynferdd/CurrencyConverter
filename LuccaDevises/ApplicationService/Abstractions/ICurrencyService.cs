@@ -2,6 +2,6 @@
 {
     public interface ICurrencyService
     {
-        int CalculateRate(string filePath);
+        int ProcessConversion(string filePath);
     }
 }

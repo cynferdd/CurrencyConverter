@@ -8,13 +8,13 @@ namespace DomainService
 {
     public class RateCalculator : IRateCalculator
     {
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
         public RateCalculator(ILogger logger)
         {
-            this.logger = logger;
+            _logger = logger;
         }
 
-        public int CalculateChangeRate(int amount, IList<Change> changes)
+        public int ConvertAmount(int amount, IList<Change> changes)
         {
             decimal convertedRate = amount;
             if (changes != null)
@@ -26,9 +26,10 @@ namespace DomainService
             }
             else
             {
-                logger.NoConversionPathFound();
+                _logger.NoConversionPathFound();
             }
             return Convert.ToInt32(Math.Round(convertedRate, 0));
         }
+
     }
 }

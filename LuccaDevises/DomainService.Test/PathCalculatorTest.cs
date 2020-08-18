@@ -31,7 +31,7 @@ namespace DomainService.Test
             currencyList.Add(new Change("JPY", "INR", 0.6571m));
             PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.GetRatesPathes(currencyList, "EUR", "JPY");
+            IList<Change> rates = pc.GetConversionRatePath(currencyList, "EUR", "JPY");
 
             Assert.Equal(3, rates.Count);
             Assert.Equal(expectedFirstChange, rates[0]);
@@ -65,7 +65,7 @@ namespace DomainService.Test
             currencyList.Add(new Change("EUR", "KWU", 1m));
             PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.GetRatesPathes(currencyList, "EUR", "JPY");
+            IList<Change> rates = pc.GetConversionRatePath(currencyList, "EUR", "JPY");
 
             Assert.Equal(2, rates.Count);
             Assert.Equal(expectedFirstChange, rates[0]);
@@ -80,7 +80,7 @@ namespace DomainService.Test
             
             PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.GetRatesPathes(new List<Change>(), "EUR", "JPY");
+            IList<Change> rates = pc.GetConversionRatePath(new List<Change>(), "EUR", "JPY");
 
             Assert.Null(rates);
             
@@ -98,7 +98,7 @@ namespace DomainService.Test
             currencyList.Add(new Change("JPY", "INR", 0.6571m));
             PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.GetRatesPathes(currencyList, "EUR", "RUB");
+            IList<Change> rates = pc.GetConversionRatePath(currencyList, "EUR", "RUB");
 
             Assert.Null(rates);
 
@@ -116,7 +116,7 @@ namespace DomainService.Test
             currencyList.Add(new Change("JPY", "INR", 0.6571m));
             PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.GetRatesPathes(currencyList, "RUB", "EUR");
+            IList<Change> rates = pc.GetConversionRatePath(currencyList, "RUB", "EUR");
 
             Assert.Null(rates);
 
@@ -143,7 +143,7 @@ namespace DomainService.Test
             currencyList.Add(new Change("JPY", "INR", 0.6571m));
             PathCalculator pc = new PathCalculator();
 
-            IList<Change> rates = pc.GetRatesPathes(currencyList, "AUD", "USD");
+            IList<Change> rates = pc.GetConversionRatePath(currencyList, "AUD", "USD");
 
             Assert.Null(rates);
 

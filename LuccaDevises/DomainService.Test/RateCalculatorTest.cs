@@ -18,7 +18,7 @@ namespace DomainService.Test
             listeChanges.Add(new Change("AUD", "JPY", 86.0305m));
             RateCalculator rc = new RateCalculator(loggerMock.Object);
 
-            int calculatedAmount = rc.CalculateChangeRate(550, listeChanges);
+            int calculatedAmount = rc.ConvertAmount(550, listeChanges);
 
             Assert.Equal(59033, calculatedAmount);
 
@@ -30,7 +30,7 @@ namespace DomainService.Test
             var loggerMock = new Mock<ILogger>();
             RateCalculator rc = new RateCalculator(loggerMock.Object);
 
-            int calculatedAmount = rc.CalculateChangeRate(550, new List<Change>());
+            int calculatedAmount = rc.ConvertAmount(550, new List<Change>());
 
             Assert.Equal(550, calculatedAmount);
 
@@ -42,7 +42,7 @@ namespace DomainService.Test
             var loggerMock = new Mock<ILogger>();
             RateCalculator rc = new RateCalculator(loggerMock.Object);
 
-            int calculatedAmount = rc.CalculateChangeRate(550, null);
+            int calculatedAmount = rc.ConvertAmount(550, null);
 
             Assert.Equal(550, calculatedAmount);
 
@@ -57,7 +57,7 @@ namespace DomainService.Test
             changeList.Add(null);
             changeList.Add(null);
 
-            int calculatedAmount = rc.CalculateChangeRate(550, changeList);
+            int calculatedAmount = rc.ConvertAmount(550, changeList);
 
             Assert.Equal(550, calculatedAmount);
 

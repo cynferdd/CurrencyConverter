@@ -9,35 +9,35 @@ namespace ApplicationService
 {
     public class CurrencyService : ICurrencyService
     {
-        private readonly IFileManager fileManager;
-        private readonly IPathCalculator pathCalculator;
-        private readonly IRateCalculator rateCalculator;
-        private readonly ILogger logger;
+        private readonly IFileManager _fileManager;
+        private readonly IPathCalculator _pathCalculator;
+        private readonly IRateCalculator _rateCalculator;
+        private readonly ILogger _logger;
         public CurrencyService(IFileManager manager, IPathCalculator pCalculator, IRateCalculator rCalculator, ILogger logger)
         {
-            fileManager = manager;
-            pathCalculator = pCalculator;
-            rateCalculator = rCalculator;
-            this.logger = logger;
+            _fileManager = manager;
+            _pathCalculator = pCalculator;
+            _rateCalculator = rCalculator;
+            _logger = logger;
         }
-        public int CalculateRate(string filePath)
+        public int ProcessConversion(string filePath)
         {
-            BaseData data = fileManager.GetData(filePath);
+            BaseData data = _fileManager.GetData(filePath);
             if (data == null)
             {
-                logger.NoDataRetrievedFromFile();
+                _logger.NoDataRetrievedFromFile();
                 return 0;
             }
 
-            IList<Change> conversionPath = pathCalculator.GetRatesPathes(data.ChangeRates, data.InitialCurrency, data.TargetCurrency);
+            IList<Change> conversionPath = _pathCalculator.GetConversionRatePath(data.ChangeRates, data.InitialCurrency, data.TargetCurrency);
             if (conversionPath == null)
             {
-                logger.NoConversionPathFound();
+                _logger.NoConversionPathFound();
                 return 0;
                 
             }
 
-            return rateCalculator.CalculateChangeRate(data.Amount, conversionPath);
+            return _rateCalculator.ConvertAmount(data.Amount, conversionPath);
         }
     }
 }

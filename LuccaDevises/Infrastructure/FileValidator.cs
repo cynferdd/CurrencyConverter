@@ -9,10 +9,10 @@ namespace Infrastructure
 {
     public class FileValidator : IFileValidator
     {
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
         public FileValidator(ILogger logger)
         {
-            this.logger = logger;
+            _logger = logger;
         }
 
         public bool Validate(IList<string> fileLines)
@@ -38,7 +38,7 @@ namespace Infrastructure
             bool isValid = (lines != null && lines.Count >= 3);
             if(!isValid)
             {
-                logger.MinimumAmountOfLinesNotReached();
+                _logger.MinimumAmountOfLinesNotReached();
             }
             return isValid;
         }
@@ -53,7 +53,7 @@ namespace Infrastructure
             bool isValid = CheckLineContains3Fields(lines[0]);
             if (!isValid)
             {
-                logger.FirstLineWrongAmountOfFields();
+                _logger.FirstLineWrongAmountOfFields();
             }
             return isValid;
         }
@@ -86,7 +86,7 @@ namespace Infrastructure
 
             if (!isValid)
             {
-                logger.FirstLineWrongFieldsFormat();
+                _logger.FirstLineWrongFieldsFormat();
             }
 
             return isValid;
@@ -102,7 +102,7 @@ namespace Infrastructure
             bool isValid = Int32.TryParse(lines[1], out int resultedInt) && resultedInt > 0;
             if (!isValid)
             {
-                logger.SecondLineWrongNotPositiveInt();
+                _logger.SecondLineWrongNotPositiveInt();
             }
             return isValid;
         }
@@ -118,7 +118,7 @@ namespace Infrastructure
             bool isValid = (lines.Count == nbLines + 2);
             if (!isValid)
             {
-                logger.WrongAmountOfLines();
+                _logger.WrongAmountOfLines();
             }
             return isValid;
         }
@@ -141,7 +141,7 @@ namespace Infrastructure
             }
             if (!isFormatOk)
             {
-                logger.WrongChangeDataFormat();
+                _logger.WrongChangeDataFormat();
             }
             return isFormatOk;
         }
@@ -169,7 +169,7 @@ namespace Infrastructure
 
             if (!isFormatOk)
             {
-                logger.WrongDataLineFormat(line);
+                _logger.WrongDataLineFormat(line);
             }
             return isFormatOk;
         }

@@ -9,23 +9,23 @@ namespace Domain
 
         public string TargetCurrency { get; private set; }
 
-        private readonly decimal Rate;
+        private readonly decimal _rate;
 
         public Change(string source, string target, decimal rate)
         {
             SourceCurrency = source;
             TargetCurrency = target;
-            Rate = rate;
+            _rate = rate;
         }
 
         public decimal Convert(decimal amount)
         {
-            return Math.Round(amount * Rate, 4);
+            return Math.Round(amount * _rate, 4);
         }
 
         public Change Invert()
         {
-            return new Change(TargetCurrency, SourceCurrency, Math.Round(1 / Rate, 4));
+            return new Change(TargetCurrency, SourceCurrency, Math.Round(1 / _rate, 4));
         }
 
         public override bool Equals(object obj)
@@ -35,7 +35,7 @@ namespace Domain
                 obj is Change change &&
                 string.Equals(SourceCurrency, change.SourceCurrency) &&
                 string.Equals(TargetCurrency, change.TargetCurrency) &&
-                Rate == change.Rate;
+                _rate == change._rate;
         }
 
         public override int GetHashCode()
@@ -45,7 +45,7 @@ namespace Domain
                 int hash = 17;
                 hash = hash * 23 + (SourceCurrency?.GetHashCode() ?? 0);
                 hash = hash * 23 + (TargetCurrency?.GetHashCode() ?? 0);
-                hash = hash * 23 + Rate.GetHashCode();
+                hash = hash * 23 + _rate.GetHashCode();
                 return hash;
             }
         }

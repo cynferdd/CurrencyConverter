@@ -6,34 +6,34 @@ namespace LuccaDevises
 {
     public class App
     {
-        private readonly ICurrencyService service;
-        private readonly ILogger logger;
+        private readonly ICurrencyService _service;
+        private readonly ILogger _logger;
         public App(ICurrencyService currencyService, ILogger logger)
         {
-            service = currencyService;
-            this.logger = logger;
+            _service = currencyService;
+            _logger = logger;
         }
 
         public void Run(string[] args)
         {
             if (args.Length == 0)
             {
-                logger.FilePathNeeded();
+                _logger.FilePathNeeded();
                 return;
             }
 
             int calculatedAmount;
             try
             {
-                calculatedAmount = service.CalculateRate(args[0]);
+                calculatedAmount = _service.ProcessConversion(args[0]);
             }
             catch (Exception e)
             {
-                logger.Write(e.Message);
+                _logger.Write(e.Message);
                 return;
             }
 
-            logger.Write(calculatedAmount.ToString());
+            _logger.Write(calculatedAmount.ToString());
         }
     }
 }

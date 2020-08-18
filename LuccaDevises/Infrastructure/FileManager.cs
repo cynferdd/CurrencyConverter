@@ -9,23 +9,23 @@ namespace Infrastructure
 {
     public class FileManager : IFileManager
     {
-        private readonly IFileValidator validator;
-        private readonly IFileParser parser;
-        private readonly ILogger logger;
+        private readonly IFileValidator _validator;
+        private readonly IFileParser _parser;
+        private readonly ILogger _logger;
         public FileManager(IFileValidator fileValidator, IFileParser fileParser, ILogger logger)
         {
-            validator = fileValidator;
-            parser = fileParser;
-            this.logger = logger;
+            _validator = fileValidator;
+            _parser = fileParser;
+            _logger = logger;
         }
 
         public BaseData GetData(string filePath)
         {
             BaseData baseData = null;
             IList<string> lines = Open(filePath);
-            if (validator.Validate(lines))
+            if (_validator.Validate(lines))
             {
-                baseData = parser.Parse(lines);
+                baseData = _parser.Parse(lines);
             }
             return baseData;
         }
@@ -34,7 +34,7 @@ namespace Infrastructure
         {
             if (!File.Exists(filePath))
             {
-                logger.FileNotFound();
+                _logger.FileNotFound();
                 return null;
             }
             string[] lines = File.ReadAllLines(filePath);
