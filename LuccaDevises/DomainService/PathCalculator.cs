@@ -26,13 +26,12 @@ namespace DomainService
             pathes.AddRange(currencyPathes);
 
             // adding inversed change rates to get all pathes and better performances
-            // since it is inversed, the rate must be modified to 1/rate, rounded to 4 decimals
             foreach (var item in currencyPathes)
             {
                 pathes.Add(item.Invert());
             }
 
-            List<List<Change>> foundPathes = FindRatesPathes(source, target, pathes.ToArray());
+            List<List<Change>> foundPathes = FindRatesPathes(source, target, pathes);
             
             // retrieving first path with minimum amount of steps
             return foundPathes.OrderBy(m => m.Count).FirstOrDefault();
@@ -46,7 +45,7 @@ namespace DomainService
         /// <param name="targetCurrency">Seeked currency</param>
         /// <param name="remainingPathes">remaining pathes to explore</param>
         /// <returns>list of working pathes</returns>
-        private List<List<Change>> FindRatesPathes(string baseCurrency, string targetCurrency, Change[] remainingPathes)
+        private List<List<Change>> FindRatesPathes(string baseCurrency, string targetCurrency, List<Change> remainingPathes)
         {
             List<List<Change>> results = new List<List<Change>>();
 
@@ -59,7 +58,7 @@ namespace DomainService
                 results.AddRange(target.Select(hit => new List<Change> { hit }));
             }
 
-            Change[] newPathes = remainingPathes.Where(item => !possible.Contains(item)).ToArray();
+            var newPathes = remainingPathes.Where(item => !possible.Contains(item)).ToList();
             foreach (Change possibleRate in possible)
             {
                 List<List<Change>> foundRatesPathes = FindRatesPathes(possibleRate.TargetCurrency, targetCurrency, newPathes);
