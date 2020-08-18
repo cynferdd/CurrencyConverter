@@ -11,15 +11,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationService", "Appli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationService.Test", "ApplicationService.Test\ApplicationService.Test.csproj", "{A69C0980-F2B6-4BA6-8C68-5BC2023E9B99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{A61F015A-F129-462A-ADD2-F38B12E64311}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{A61F015A-F129-462A-ADD2-F38B12E64311}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Test", "Infrastructure.Test\Infrastructure.Test.csproj", "{A0A1F910-87FB-42C9-BA21-6C22D85D9AB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Test", "Infrastructure.Test\Infrastructure.Test.csproj", "{A0A1F910-87FB-42C9-BA21-6C22D85D9AB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainService", "DomainService\DomainService.csproj", "{6A66E03C-AB53-4EC9-8626-1EA0DBD213CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainService", "DomainService\DomainService.csproj", "{6A66E03C-AB53-4EC9-8626-1EA0DBD213CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainService.Test", "DomainService.Test\DomainService.Test.csproj", "{9CBDF41F-4BF3-43B7-9B97-2364D797C932}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainService.Test", "DomainService.Test\DomainService.Test.csproj", "{9CBDF41F-4BF3-43B7-9B97-2364D797C932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{BA2504F1-FF61-4A83-B46B-201F9418030C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger", "Logger\Logger.csproj", "{BA2504F1-FF61-4A83-B46B-201F9418030C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Test", "Domain.Test\Domain.Test.csproj", "{E0E3072B-C5FF-4D09-9897-E81905918432}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{BA2504F1-FF61-4A83-B46B-201F9418030C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA2504F1-FF61-4A83-B46B-201F9418030C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA2504F1-FF61-4A83-B46B-201F9418030C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0E3072B-C5FF-4D09-9897-E81905918432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0E3072B-C5FF-4D09-9897-E81905918432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0E3072B-C5FF-4D09-9897-E81905918432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0E3072B-C5FF-4D09-9897-E81905918432}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

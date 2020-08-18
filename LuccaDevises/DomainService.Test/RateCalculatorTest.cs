@@ -47,5 +47,20 @@ namespace DomainService.Test
             Assert.Equal(550, calculatedAmount);
 
         }
+
+        [Fact]
+        public void ShouldGetSameAmount_WhenGivenListWithNullChanges()
+        {
+            var loggerMock = new Mock<ILogger>();
+            RateCalculator rc = new RateCalculator(loggerMock.Object);
+            var changeList = new List<Change>();
+            changeList.Add(null);
+            changeList.Add(null);
+
+            int calculatedAmount = rc.CalculateChangeRate(550, changeList);
+
+            Assert.Equal(550, calculatedAmount);
+
+        }
     }
 }

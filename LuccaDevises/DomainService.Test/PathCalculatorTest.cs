@@ -19,6 +19,9 @@ namespace DomainService.Test
         [Fact]
         public void ShouldRetrieveEURCHFAUDJPY_WhenGivenExampleArray()
         {
+            Change expectedFirstChange = new Change("EUR", "CHF", 1.2053m);
+            Change expectedSecondChange = new Change("CHF", "AUD", 1.0351m);
+            Change expectedThirdChange = new Change("AUD", "JPY", 86.0305m);
             List<Change> currencyList = new List<Change>();
             currencyList.Add(new Change("AUD", "CHF", 0.9661m));
             currencyList.Add(new Change("JPY", "KWU", 13.1151m));
@@ -31,15 +34,9 @@ namespace DomainService.Test
             IList<Change> rates = pc.GetRatesPathes(currencyList, "EUR", "JPY");
 
             Assert.Equal(3, rates.Count);
-            Assert.Equal("EUR", rates[0].SourceCurrency);
-            Assert.Equal("CHF", rates[0].TargetCurrency);
-            Assert.Equal(1.2053m, rates[0].Rate);
-            Assert.Equal("CHF", rates[1].SourceCurrency);
-            Assert.Equal("AUD", rates[1].TargetCurrency);
-            Assert.Equal(1.0351m, rates[1].Rate);
-            Assert.Equal("AUD", rates[2].SourceCurrency);
-            Assert.Equal("JPY", rates[2].TargetCurrency);
-            Assert.Equal(86.0305m, rates[2].Rate);
+            Assert.Equal(expectedFirstChange, rates[0]);
+            Assert.Equal(expectedSecondChange, rates[1]);
+            Assert.Equal(expectedThirdChange, rates[2]);
 
         }
 
@@ -56,6 +53,8 @@ namespace DomainService.Test
         [Fact]
         public void ShouldRetrieveEURKWUJPY_WhenKWUShortcutAdded()
         {
+            Change expectedFirstChange = new Change("EUR", "KWU", 1m);
+            Change expectedSecondChange = new Change("KWU", "JPY", 0.0762m);
             List<Change> currencyList = new List<Change>();
             currencyList.Add(new Change("AUD", "CHF", 0.9661m));
             currencyList.Add(new Change("JPY", "KWU", 13.1151m));
@@ -69,11 +68,9 @@ namespace DomainService.Test
             IList<Change> rates = pc.GetRatesPathes(currencyList, "EUR", "JPY");
 
             Assert.Equal(2, rates.Count);
-            Assert.Equal("EUR", rates[0].SourceCurrency);
-            Assert.Equal("KWU", rates[0].TargetCurrency);
-            Assert.Equal("KWU", rates[1].SourceCurrency);
-            Assert.Equal("JPY", rates[1].TargetCurrency);
-            
+            Assert.Equal(expectedFirstChange, rates[0]);
+            Assert.Equal(expectedSecondChange, rates[1]);
+
 
         }
 

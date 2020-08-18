@@ -21,7 +21,7 @@ namespace DomainService
             {
                 foreach (var item in changes)
                 {
-                    convertedRate = Math.Round(convertedRate * item.Rate, 4);
+                    convertedRate = item?.Convert(convertedRate) ?? convertedRate;
                 }
             }
             else

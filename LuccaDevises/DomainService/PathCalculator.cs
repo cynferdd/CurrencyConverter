@@ -29,7 +29,7 @@ namespace DomainService
             // since it is inversed, the rate must be modified to 1/rate, rounded to 4 decimals
             foreach (var item in currencyPathes)
             {
-                pathes.Add(new Change(item.TargetCurrency, item.SourceCurrency, Math.Round(1 / item.Rate, 4)));
+                pathes.Add(item.Invert());
             }
 
             List<List<Change>> foundPathes = FindRatesPathes(source, target, pathes.ToArray());
